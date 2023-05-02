@@ -8,32 +8,29 @@
              x:Class="NodeEditor.Views.Nodes.NodeView"
              x:DataType="vm:NodeViewModel"
              Width="200">
-
-  <UserControl.DataContext>
-    <vm:NodeViewModel/>
-  </UserControl.DataContext>
   
   <Border CornerRadius="15" ClipToBounds="True">
     <Grid RowDefinitions="Auto, Auto">
       <!-- Upper red part -->
-      <Label Grid.Row="0" Height="30" VerticalContentAlignment="Center" Background="rgb(200, 0, 0)" FontWeight="Medium" Content="Test Node" Padding="6.5, 0, 0, 0"/>
+      <Label Grid.Row="0" Content="{Binding Name}" Height="30" VerticalContentAlignment="Center" 
+             FontWeight="Medium" Background="rgb(200, 0, 0)" Padding="6.5, 0, 0, 0"/>
       <!-- Main body -->
       <Grid Grid.Row="1" ColumnDefinitions="100, 100">
-        <ItemsControl Grid.Column="0" Items="{Binding Inputs}" Padding="0, 0, 0, 5" Background="rgb(75, 75, 75)">
+        <ItemsControl Grid.Column="0" Items="{Binding Inputs}" Background="rgb(75, 75, 75)" Padding="0, 0, 0, 5">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
               <Grid ColumnDefinitions="Auto, Auto" HorizontalAlignment="Left">
                 <nc:NodeAnchorView Grid.Column="0" Margin="6.5, 0, 0, 0"/>
-                <Label Grid.Column="1" Foreground="rgb(220, 220, 220)" FontSize="12" Content="{Binding}"/>
+                <Label Grid.Column="1" Foreground="rgb(220, 220, 220)" FontSize="12" Content="{Binding Name}"/>
               </Grid>
             </DataTemplate>
           </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <ItemsControl Grid.Column="1" Items="{Binding Outputs}" Padding="0, 0, 0, 5" Background="rgb(65, 65, 65)">
+        <ItemsControl Grid.Column="1" Items="{Binding Outputs}" Background="rgb(65, 65, 65)" Padding="0, 0, 0, 5">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
               <Grid ColumnDefinitions="Auto, Auto" HorizontalAlignment="Right">
-                <Label Grid.Column="0" Foreground="rgb(220, 220, 220)" FontSize="12" Content="{Binding}"/>
+                <Label Grid.Column="0" Foreground="rgb(220, 220, 220)" FontSize="12" Content="{Binding Name}"/>
                 <nc:NodeAnchorView Grid.Column="1" Margin="0, 0, 6.5, 0"/>
               </Grid>
             </DataTemplate>

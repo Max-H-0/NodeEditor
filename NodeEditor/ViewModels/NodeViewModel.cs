@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using NodeEditor.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -6,20 +7,30 @@ namespace NodeEditor.ViewModels;
 
 internal class NodeViewModel : ViewModelBase
 {
-    public List<string> Inputs { get; set; } = new() { "String", "Int", "Float" };
-    public List<string> Outputs { get; set; } = new() { "Out" };
-
-    public Point Position { get; set; } = new(0, 0);
+    private Node _node;
 
 
-    public NodeViewModel()
+    public string Name { get => _node.Name; }
+
+    public List<NodeAnchorViewModel> Inputs { get; set; } = new();
+    public List<NodeAnchorViewModel> Outputs { get; set; } = new();
+
+    public Point Position { get; set; }
+
+
+    public NodeViewModel(Node node, Point position)
     {
-    }
+        _node = node;
 
-    public NodeViewModel(List<string> inputs, List<string> outputs, Point position)
-    {
-        Inputs = inputs;
-        Outputs = outputs;
+        for(int i = 0; i < node.Inputs?.Count; i++)
+        {
+            Inputs.Add(new(node.Inputs[i]));
+        }
+
+        for (int i = 0; i < node.Outputs?.Count; i++)
+        {
+            Outputs.Add(new(node.Outputs[i]));
+        }
 
         Position = position;
     }

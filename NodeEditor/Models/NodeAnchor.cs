@@ -6,8 +6,10 @@ public class NodeAnchor
 {
     public string Name { get; set; }
 
-    public NodeAnchorType Type { get; private set; }
-    public NodeAnchorConnection Connection { get; private set; }
+    public Type ValueType { get; private set; }
+
+    public NodeAnchorType ConnectionType { get; private set; }
+    public NodeAnchorConnection Connection { get; private set; } = new(null, null);
 
 
     public event EventHandler<NodeAnchorConnectionEventArgs> ConnectionChanged;
@@ -15,7 +17,7 @@ public class NodeAnchor
 
     public NodeAnchor(NodeAnchorType nodeAnchorType)
     {
-        Type = nodeAnchorType;
+        ConnectionType = nodeAnchorType;
     }
 
 
@@ -23,11 +25,11 @@ public class NodeAnchor
     {
         NodeAnchorConnection newConnection = Connection;
 
-        if(Type == NodeAnchorType.Output) 
+        if(ConnectionType == NodeAnchorType.Output) 
         {
             newConnection = new(this, other);
         }        
-        else if(Type == NodeAnchorType.Input) 
+        else if(ConnectionType == NodeAnchorType.Input) 
         {
             newConnection = new(other, this);
         }
@@ -36,7 +38,7 @@ public class NodeAnchor
         other.UpdateConnection(newConnection);
     }
 
-    public void UpdateConnection(NodeAnchorConnection connection)
+    protected void UpdateConnection(NodeAnchorConnection connection)
     {
         NodeAnchorConnection previousConnection = Connection;
         Connection = connection;

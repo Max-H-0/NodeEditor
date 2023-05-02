@@ -14,7 +14,7 @@
   </UserControl.DataContext>
   
   <Panel>
-    <ItemsControl Name="NodeContainer" Items="{Binding NodeGraph.Nodes}" x:CompileBindings="true" x:DataType="vm:NodeGraphViewModel">
+    <ItemsControl Name="NodeContainer" Items="{Binding Nodes}" x:CompileBindings="true" x:DataType="vm:NodeGraphViewModel">
       <ItemsControl.ItemsPanel>
         <ItemsPanelTemplate>
           <Canvas Width="10000" Height="10000"/>

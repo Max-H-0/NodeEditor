@@ -2,20 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace NodeEditor.Models;
 
 public class NodeGraph
 {
-    public ObservableCollection<Node> Nodes { get; set; }
+    public ObservableCollection<Node> Nodes { get; set; } = new();
 
     public MultiKeyDictionary<NodeAnchor, NodeAnchorConnection> Connections { get; set; }
 
 
-    public NodeGraph(ObservableCollection<Node> nodes) 
+    public NodeGraph() 
     { 
-        Nodes = nodes;
-
         Initialize();
     }
 

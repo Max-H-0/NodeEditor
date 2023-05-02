@@ -21,12 +21,12 @@ public class Node
 
     void Initialize()
     {
-        for (int i = 0; i < Inputs.Count; i++)
+        for (int i = 0; i < Inputs?.Count; i++)
         {
             Inputs[i].ConnectionChanged += OnAnchorConnectionChanged;
         }
 
-        for (int i = 0; i < Outputs.Count; i++)
+        for (int i = 0; i < Outputs?.Count; i++)
         {
             Outputs[i].ConnectionChanged += OnAnchorConnectionChanged;
         }

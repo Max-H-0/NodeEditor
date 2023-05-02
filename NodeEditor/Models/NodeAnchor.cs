@@ -4,20 +4,23 @@ namespace NodeEditor.Models;
 
 public class NodeAnchor
 {
-    public string Name { get; set; }
+    public string Name { get; init; }
 
-    public Type ValueType { get; private set; }
+    public Type ValueType { get; init; }
 
-    public NodeAnchorType ConnectionType { get; private set; }
-    public NodeAnchorConnection Connection { get; private set; } = new(null, null);
+    public NodeAnchorType ConnectionType { get; init; }
+    public NodeAnchorConnection Connection { get; private set; }
 
 
     public event EventHandler<NodeAnchorConnectionEventArgs> ConnectionChanged;
 
 
-    public NodeAnchor(NodeAnchorType nodeAnchorType)
+    public NodeAnchor(string name, Type valueType, NodeAnchorType connectionType)
     {
-        ConnectionType = nodeAnchorType;
+        Name = name;
+        ValueType = valueType;
+        ConnectionType = connectionType;
+        Connection = new(null, null);
     }
 
 

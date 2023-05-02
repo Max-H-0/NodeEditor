@@ -5,10 +5,10 @@ namespace NodeEditor.Models;
 
 public class Node
 {
-    public string Name { get; set; }
+    public virtual string Name { get; set; }
 
-    public List<NodeAnchor> Inputs { get; set; }
-    public List<NodeAnchor> Outputs { get; set; }
+    public virtual List<NodeAnchor> Inputs { get; set; }
+    public virtual List<NodeAnchor> Outputs { get; set; }
 
 
     public event EventHandler<NodeAnchorConnectionEventArgs> AnchorConnectionChanged;

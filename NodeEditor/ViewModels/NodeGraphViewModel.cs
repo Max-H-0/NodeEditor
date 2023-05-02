@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using NodeEditor.Models;
+using NodeEditor.Nodes;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
@@ -22,21 +23,7 @@ internal class NodeGraphViewModel : ViewModelBase
 
         _nodeGraph.Nodes.Add
         (
-            new Node()
-            {
-                Name = "Pythagoras",
-
-                Inputs = new List<NodeAnchor>() 
-                {
-                    new NodeAnchor(NodeAnchorType.Input) { Name = "A" },
-                    new NodeAnchor(NodeAnchorType.Input) { Name = "B" } 
-                },
-
-                Outputs = new List<NodeAnchor>() 
-                {
-                    new NodeAnchor(NodeAnchorType.Output) { Name = "C" } 
-                }
-            }
+            new TestNode()
         );
     }
 

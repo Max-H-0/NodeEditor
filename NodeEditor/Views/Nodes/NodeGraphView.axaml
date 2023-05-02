@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:NodeEditor.ViewModels"
+             xmlns:v="using:NodeEditor.Views"
+             xmlns:vn="using:NodeEditor.Views.Nodes"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="NodeEditor.Views.Nodes.NodeGraphView"
+             x:DataType="vm:NodeGraphViewModel">
+  
+  <UserControl.DataContext>
+    <vm:NodeGraphViewModel/>
+  </UserControl.DataContext>
+  
+  <Panel>
+    <ItemsControl Name="NodeContainer" Items="{Binding NodeGraph.Nodes}" x:CompileBindings="true" x:DataType="vm:NodeGraphViewModel">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <Canvas Width="10000" Height="10000"/>
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <vn:NodeView Canvas.Left="{Binding Position.X}" Canvas.Top="{Binding Position.Y}" DataContext="{Binding}"/>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </Panel>
+  
+</UserControl>

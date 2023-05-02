@@ -1,0 +1,12 @@
+<Style xmlns="https://github.com/avaloniaui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  
+  <Style.Resources>
+    <ResourceDictionary>
+      <SolidColorBrush x:Key="GraphPrimaryLine" Color="rgb(15, 15, 15)"/>
+      <SolidColorBrush x:Key="GraphSecondaryLine" Color="rgb(30, 30, 30)"/>
+      <SolidColorBrush x:Key="GraphBackground" Color="rgb(45, 45, 45)"/>
+    </ResourceDictionary>
+  </Style.Resources>
+  
+</Style>

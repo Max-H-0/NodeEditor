@@ -17,7 +17,7 @@ public class NodeAnchorViewModel : ViewModelBase
 
     public Type ValueType { get => _nodeAnchor.ValueType; }
 
-    public NodeAnchorType Type { get => _nodeAnchor.ConnectionType; }
+    public NodeAnchorType ConnectionType { get => _nodeAnchor.ConnectionType; }
     public NodeAnchorConnection Connection { get => _nodeAnchor.Connection; }
 
 

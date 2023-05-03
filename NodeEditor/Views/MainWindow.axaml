@@ -23,7 +23,7 @@
       </MenuItem>
     </Menu>
     <Panel Grid.Row="1" ClipToBounds="True">
-      <v:PanAndZoom Width="10000" Height="10000">
+      <v:PanAndZoom Width="" Height="">
         <v:GridLines Width="10000" Height="10000" LineCount="500" PrimaryLineStep="5"
                      PrimaryLineBrush="{StaticResource GraphPrimaryLine}"
                      SecondaryLineBrush="{StaticResource GraphSecondaryLine}"

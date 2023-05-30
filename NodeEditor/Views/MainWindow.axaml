@@ -28,7 +28,6 @@
                      PrimaryLineBrush="{StaticResource GraphPrimaryLine}"
                      SecondaryLineBrush="{StaticResource GraphSecondaryLine}"
                      Background="{StaticResource GraphBackground}"/>
-        <vn:NodeGraphView/>
       </v:PanAndZoom>
     </Panel>
   </Grid>

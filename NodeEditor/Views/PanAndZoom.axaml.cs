@@ -8,6 +8,9 @@ namespace NodeEditor.Views;
 
 public partial class PanAndZoom : Canvas
 {
+    private readonly TranslateTransform _translateTransform;
+    private readonly ScaleTransform _scaleTransform;
+
     private Point _previousPoint;
     private bool _isPanning;
 
@@ -15,9 +18,9 @@ public partial class PanAndZoom : Canvas
     {
         InitializeComponent();
 
-        TransformGroup transformGroup = new TransformGroup();
-        transformGroup.Children.Add(new TranslateTransform());
-        transformGroup.Children.Add(new ScaleTransform());
+        TransformGroup transformGroup = new();
+        transformGroup.Children.Add(_translateTransform = new TranslateTransform());
+        transformGroup.Children.Add(_scaleTransform = new ScaleTransform());
 
         RenderTransform = transformGroup;
 
@@ -45,16 +48,12 @@ public partial class PanAndZoom : Canvas
 
         if (_isPanning)
         {
-            TransformGroup transformGroup = (TransformGroup)RenderTransform;
-            TranslateTransform translateTransform = (TranslateTransform)transformGroup.Children[0];
-            ScaleTransform scaleTransform = (ScaleTransform)transformGroup.Children[1];
-
             Point currentPoint = e.GetPosition(Parent);
 
             Point delta = currentPoint - _previousPoint;
 
-            translateTransform.X += delta.X / scaleTransform.ScaleX;
-            translateTransform.Y += delta.Y / scaleTransform.ScaleY;
+            _translateTransform.X += delta.X / _scaleTransform.ScaleX;
+            _translateTransform.Y += delta.Y / _scaleTransform.ScaleY;
 
             ClampPosition();
 
@@ -73,40 +72,32 @@ public partial class PanAndZoom : Canvas
     {
         base.OnPointerWheelChanged(e);
 
-        TransformGroup transformGroup = (TransformGroup)RenderTransform;
-        TranslateTransform translateTransform = (TranslateTransform)transformGroup.Children[0];
-        ScaleTransform scaleTransform = (ScaleTransform)transformGroup.Children[1];
+        double scaleStep = 0.2 * _scaleTransform.ScaleX;
 
-        double scaleStep = 0.2 * scaleTransform.ScaleX;
-
-        double scale = Math.Clamp(scaleTransform.ScaleX + e.Delta.Y * scaleStep, 0.25, 5);
+        double scale = Math.Clamp(_scaleTransform.ScaleX + e.Delta.Y * scaleStep, 0.25, 5);
 
         Point oldMousePoint = e.GetPosition(this);
 
-        scaleTransform.ScaleX = scale;
-        scaleTransform.ScaleY = scale;
+        _scaleTransform.ScaleX = scale;
+        _scaleTransform.ScaleY = scale;
 
         Point mouseDelta = e.GetPosition(this) - oldMousePoint;
 
         double xOffset = mouseDelta.X;
         double yOffset = mouseDelta.Y;
 
-        translateTransform.X += xOffset;
-        translateTransform.Y += yOffset;
+        _translateTransform.X += xOffset;
+        _translateTransform.Y += yOffset;
 
         ClampPosition();
     }
 
     void ClampPosition()
     {
-        TransformGroup transformGroup = (TransformGroup)RenderTransform;
-        TranslateTransform translateTransform = (TranslateTransform)transformGroup.Children[0];
-        ScaleTransform scaleTransform = (ScaleTransform)transformGroup.Children[1];
+        double maxX = (Bounds.Width - Parent.Bounds.Width / _scaleTransform.ScaleY) * 0.5;
+        double maxY = (Bounds.Height - Parent.Bounds.Height / _scaleTransform.ScaleY) * 0.5;
 
-        double maxX = (Bounds.Width - Parent.Bounds.Width / scaleTransform.ScaleY) * 0.5;
-        double maxY = (Bounds.Height - Parent.Bounds.Height / scaleTransform.ScaleY) * 0.5;
-
-        translateTransform.X = Math.Clamp(translateTransform.X, -maxX, maxX);
-        translateTransform.Y = Math.Clamp(translateTransform.Y, -maxY, maxY);
+        _translateTransform.X = Math.Clamp(_translateTransform.X, -maxX, maxX);
+        _translateTransform.Y = Math.Clamp(_translateTransform.Y, -maxY, maxY);
     }
 }
